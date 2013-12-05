@@ -75,13 +75,13 @@ would look something like:
 msgid "button/save-change"
 msgid_plural "button/save-changes"
 msgstr[0] "Save Change"
-msgstr[1] "Save Changes
+msgstr[1] "Save Changes"
 ```
 
 Which will be converted into:
 
 ```json
-  "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes}}"
+  {"button/save-change": "{PLURAL, Save singular{Change}  plural{Changes}}"}
 ```
 
 Please, for complex language pluralizations, like in German, I would recommend to make a quick scann, to make sure
@@ -98,18 +98,18 @@ msgstr[1] "Save Changes"
 
 This will be the result
 ```json
-  "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} there hello}",
+  {"button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} there hello}"}
 ```
 And if you have something like this:
 ```po
 msgid "button/save-change"
 msgid_plural "button/save-changes"
 msgstr[0] "Save Change there"
-msgstr[1] "Save Changes hello
+msgstr[1] "Save Changes hello"
 ```
 This will be the result
 ```json
-  "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} singular{there}  plural{hello}}",
+  {"button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} singular{there}  plural{hello}}"}
 ```
 
 ## Contributing
