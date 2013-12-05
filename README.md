@@ -65,6 +65,50 @@ grunt.initConfig({
 });
 ```
 
+#### Pluralization
+
+To get the angular-translate format of [pluralizations](http://pascalprecht.github.io/angular-translate/docs/en/#/guide/12_pluralization),
+we need to have a po file with the [standard format](http://www.gnu.org/software/gettext/manual/html_node/Translating-plural-forms.html), which
+would look something like:
+
+```po
+msgid "button/save-change"
+msgid_plural "button/save-changes"
+msgstr[0] "Save Change"
+msgstr[1] "Save Changes
+
+Which will be converted into:
+
+```json
+  "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes}}"
+
+Please, for complex language pluralizations, like in German, I would recommend to make a quick scann, to make sure
+that everything makes sense.
+
+If your have something like this:
+
+```po
+msgid "button/save-change"
+msgid_plural "button/save-changes"
+msgstr[0] "Save Change there hello"
+msgstr[1] "Save Changes"
+
+
+This will be the result
+```json
+  "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} there hello}",
+
+And if you have something like this:
+```po
+msgid "button/save-change"
+msgid_plural "button/save-changes"
+msgstr[0] "Save Change there"
+msgstr[1] "Save Changes hello
+
+This will be the result
+```json
+  "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} singular{there}  plural{hello}}",
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
@@ -78,7 +122,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Features planned
 
-* Support for angular-translate pluralization and interpolation
+* Support for interpolation
+* Improve pluralizations.
 * Replace placeholders from %d to {{ d }}. With option to set custom placeholders in the options
 * Posibility to escape special characters
 * Option to generate the result either as a json file, as it is done currently, or directly in angular format
