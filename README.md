@@ -81,7 +81,7 @@ msgstr[1] "Save Changes"
 Which will be converted into:
 
 ```json
-  {"button/save-change": "{PLURAL, Save singular{Change}  plural{Changes}}"}
+  {"button/save-change": "Save {PLURAL,select, singular{Change}  plural{Changes}}"}
 ```
 
 Please, for complex language pluralizations, like in German, I would recommend to make a quick scann, to make sure
@@ -98,7 +98,7 @@ msgstr[1] "Save Changes"
 
 This will be the result
 ```json
-  {"button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} there hello}"}
+  {"button/save-change": "Save {PLURAL, select, singular{Change}  plural{Changes}} there hello"}
 ```
 And if you have something like this:
 ```po
@@ -109,7 +109,7 @@ msgstr[1] "Save Changes hello"
 ```
 This will be the result
 ```json
-  {"button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} singular{there}  plural{hello}}"}
+  {"button/save-change": "Save {PLURAL,select,  singular{Change}  plural{Changes}} {PLURAL,select, singular{there}  plural{hello}}"}
 ```
 
 ## Contributing
