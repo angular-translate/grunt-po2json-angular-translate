@@ -25,8 +25,9 @@ In your project's Gruntfile, add a section named `po2json_angular_translate` to 
 ```js
 grunt.initConfig({
   po2json_angular_translate: {
-    options: {
-      // Task-specific options go here.
+  options: {
+     pretty: false,
+     upperCaseId : false
     },
     your_target: {
       // Target-specific file lists and/or options go here.
@@ -37,17 +38,17 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.pretty
+Type: `Boolean`
+Default value:  false
+If you want to pretty print the result
 
-A string value that is used to do something with whatever.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.upperCaseId
+Type: `Boolean`
+Default value:  false
+If you want to convert the ids to uppercase
 
-A string value that is used to do something else with whatever else.
 
 ### Usage Examples
 
@@ -59,31 +60,26 @@ grunt.initConfig({
   po2json_angular_translate: {
     options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest/': ['src/**/*.po'],
     },
   },
 });
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  po2json_angular_translate: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
+
+
 ## Release History
-_(Nothing yet)_
+
+0.0.1 First basic functionality. Just convert the po files into JSON objects compatible with angular-translate
+
+
+## Features planned
+
+* Support for angular-translate pluralization and interpolation
+* Replace placeholders from %d to {{ d }}. With option to set custom placeholders in the options
+* Posibility to escape special characters
+* Option to generate the result either as a json file, as it is done currently, or directly in angular format
