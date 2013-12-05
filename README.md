@@ -76,11 +76,13 @@ msgid "button/save-change"
 msgid_plural "button/save-changes"
 msgstr[0] "Save Change"
 msgstr[1] "Save Changes
+```
 
 Which will be converted into:
 
 ```json
   "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes}}"
+```
 
 Please, for complex language pluralizations, like in German, I would recommend to make a quick scann, to make sure
 that everything makes sense.
@@ -92,23 +94,23 @@ msgid "button/save-change"
 msgid_plural "button/save-changes"
 msgstr[0] "Save Change there hello"
 msgstr[1] "Save Changes"
-
+```
 
 This will be the result
 ```json
   "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} there hello}",
-
+```
 And if you have something like this:
 ```po
 msgid "button/save-change"
 msgid_plural "button/save-changes"
 msgstr[0] "Save Change there"
 msgstr[1] "Save Changes hello
-
+```
 This will be the result
 ```json
   "button/save-change": "{PLURAL, Save singular{Change}  plural{Changes} singular{there}  plural{hello}}",
-
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
