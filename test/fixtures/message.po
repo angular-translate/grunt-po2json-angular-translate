@@ -1,0 +1,17 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: daniela Valero <danielavalero255@gmail.com\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "[:message/maintenance :title]"
+msgstr "Maintenance"
+
+msgid "[:message/maintenance :body]"
+msgstr "There is currently some scheduled maintenance on our servers. \nPlease check back in a few minutes."

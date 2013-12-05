@@ -1,0 +1,25 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: daniela Valero <danielavalero255@gmail.com\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "button/submit"
+msgstr "Submit"
+
+msgid "button/save-change"
+msgstr "Save Change"
+#msgid_plural "button/save-changes"
+#msgstr[0] "Save Change {0}"
+#msgstr[1] "Save Changes"
+
+msgid "button/register"
+msgstr "Register"
+
+msgid "button/delete-account"
+msgstr "Delete Account"

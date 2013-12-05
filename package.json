@@ -1,0 +1,46 @@
+{
+  "name": "grunt-po2json-angular-translate",
+  "description": "grunt plugin to convert po to angangular-translate format",
+  "version": "0.0.1",
+  "homepage": "https://github.com/root/grunt-po2json-angular-translate",
+  "author": {
+    "name": "danielavalero",
+    "email": "danielavalero255@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/root/grunt-po2json-angular-translate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/root/grunt-po2json-angular-translate/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/root/grunt-po2json-angular-translate/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.2"
+  },
+  "peerDependencies": {
+      "grunt": "~0.4.2"
+  },
+    "dependencies": {
+        "node-po": "~0.1.2",
+        "path"  : "~0.4.9"
+    },
+    "keywords": [
+        "gruntplugin"
+    ]
+}
