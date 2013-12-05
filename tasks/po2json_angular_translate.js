@@ -72,7 +72,7 @@ module.exports = function(grunt) {
 
                             if (singular_words[x] !== plural_words[x] && singular_words[x] !== undefined &&  plural_words[x] !== undefined){
 
-                                pluralizedStr += "singular{" + singular_words[x]+"}  plural{"+ plural_words[x] +"}";
+                                pluralizedStr += "{PLURAL, select, singular{" + singular_words[x]+"}  plural{"+ plural_words[x] +"}}";
 
                             }else{
                                 if (singular_words[x] !== undefined && plural_words[x] === undefined){
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
                                 pluralizedStr += " ";
                             }
                         }
-                        strings[item.msgid] = "{PLURAL, "+ pluralizedStr +"}";
+                        strings[item.msgid] = pluralizedStr ;
                     }else{
                         strings[item.msgid] = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
                     }
