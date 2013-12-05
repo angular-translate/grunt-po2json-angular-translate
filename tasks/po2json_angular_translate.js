@@ -19,7 +19,8 @@ module.exports = function(grunt) {
             pretty: false,
             fuzzy: false,
             upperCaseId : false,
-            stringify : true
+            stringify : true,
+            offset : 1
         });
 
         this.files.forEach(function(f) {
@@ -57,38 +58,50 @@ module.exports = function(grunt) {
                         item.msgid = item.msgid.toUpperCase();
                     }
 
-                   if (item.msgid_plural!== null && item.msgstr.length !== 1){
+                    if (item.msgid_plural!== null && item.msgstr.length > 1){
                         var singular_words = item.msgstr[0].split(" ");
                         var plural_words = item.msgstr[1].split(" ");
-
                         var pluralizedStr = "";
+                        var numberPlaceHolder = false;
+
+                        if (singular_words.length !== plural_words.length){
+                            grunt.log.writeln('Either the singular or plural string had more words in the msgid: ' + item.msgid + ', the extra words were omitted');
+                        }
 
                         for (var x = 0; x < singular_words.length; x++){
 
-                            if (singular_words.length !== plural_words.length){
-                                grunt.log.writeln('I found an irregular pluralization in the msgid: ' + item.msgid + ', please have a look on it on the resulting json file');
+                            if(singular_words[x] === undefined || plural_words[x] === undefined){
+                                continue;
                             }
 
+                            if (plural_words[x].indexOf('%d') !== -1){
+                                numberPlaceHolder = true;
+                                continue;
+                            }
 
-                            if (singular_words[x] !== plural_words[x] && singular_words[x] !== undefined &&  plural_words[x] !== undefined){
+                            if (singular_words[x] !== plural_words[x]){
+                                var p = "";
+                                if (numberPlaceHolder){
+                                    p = "# ";
+                                    numberPlaceHolder = false;
+                                }
 
-                                pluralizedStr += "{PLURAL, select, singular{" + singular_words[x]+"}  plural{"+ plural_words[x] +"}}";
+                                var strPl = "PLURALIZE, plural, offset:"+options.offset;
+
+                                pluralizedStr += "{"+ strPl + " =2{" + p + singular_words[x]+"}" +
+                                    " other{" + p + plural_words[x] +"}}";
 
                             }else{
-                                if (singular_words[x] !== undefined && plural_words[x] === undefined){
-                                    pluralizedStr += singular_words[x];
-                                } else if (singular_words[x] === undefined && plural_words[x] !== undefined){
-                                    pluralizedStr += plural_words[x];
-                                }else{
-                                    pluralizedStr += singular_words[x];
-                                }
+                                pluralizedStr += singular_words[x];
                             }
 
                             if (x !== singular_words.length - 1 ){
                                 pluralizedStr += " ";
                             }
                         }
+
                         strings[item.msgid] = pluralizedStr ;
+
                     }else{
                         strings[item.msgid] = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
                     }

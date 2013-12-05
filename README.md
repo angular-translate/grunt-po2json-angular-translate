@@ -74,43 +74,30 @@ would look something like:
 ```po
 msgid "button/save-change"
 msgid_plural "button/save-changes"
-msgstr[0] "Save Change"
-msgstr[1] "Save Changes"
+msgstr[0] "Save %d Change"
+msgstr[1] "Save %d Changes"
 ```
 
 Which will be converted into:
 
 ```json
-  {"button/save-change": "Save {PLURAL,select, singular{Change}  plural{Changes}}"}
+  {"button/save-change": "Save {PLURALIZE, plural, offset:1 =2{# Change} other{# Changes}}"}
 ```
 
 Please, for complex language pluralizations, like in German, I would recommend to make a quick scann, to make sure
 that everything makes sense.
 
-If your have something like this:
+Be sure that both (singular and plural) contain the same length, otherwise, the output won't be the desired one
+
+*Not*
 
 ```po
 msgid "button/save-change"
 msgid_plural "button/save-changes"
-msgstr[0] "Save Change there hello"
+msgstr[0] "Save %d Change"
 msgstr[1] "Save Changes"
 ```
 
-This will be the result
-```json
-  {"button/save-change": "Save {PLURAL, select, singular{Change}  plural{Changes}} there hello"}
-```
-And if you have something like this:
-```po
-msgid "button/save-change"
-msgid_plural "button/save-changes"
-msgstr[0] "Save Change there"
-msgstr[1] "Save Changes hello"
-```
-This will be the result
-```json
-  {"button/save-change": "Save {PLURAL,select,  singular{Change}  plural{Changes}} {PLURAL,select, singular{there}  plural{hello}}"}
-```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

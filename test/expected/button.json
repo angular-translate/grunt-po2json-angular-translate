@@ -1,6 +1,6 @@
 {
    "button/submit": "Submit",
-   "button/save-change": "Save {PLURAL, select, singular{Change}  plural{Changes}}",
+   "button/save-change": "Save {PLURALIZE, plural, offset:1 =2{Change} other{Changes}}",
    "button/register": "Register",
    "button/delete-account": "Delete Account"
 }
