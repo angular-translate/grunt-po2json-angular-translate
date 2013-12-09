@@ -1,7 +1,7 @@
 {
   "name": "grunt-po2json-angular-translate",
   "description": "grunt plugin to convert po to angangular-translate format",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/danielavalero/grunt-po2json-angular-translate",
   "author": {
     "name": "danielavalero",
