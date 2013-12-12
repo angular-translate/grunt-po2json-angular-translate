@@ -33,7 +33,8 @@ module.exports = function(grunt) {
                     cleanPrevStrings: true
                 },
                 files: {
-                    'tmp/' : ['test/fixtures/button.po']
+                    'tmp/' : ['test/fixtures/*.po'],
+                    'tmp/several.json' : ['test/fixtures/*.po']
                 },
             }
         },

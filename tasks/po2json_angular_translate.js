@@ -94,7 +94,7 @@ module.exports = function(grunt) {
             var destPath = path.extname(f.dest);
             var dest;
             var singleFile = false;
-            var strings = {};
+             var singleFileStrings = {};
 
             if (destPath !== ""){ //It is just one file, we should put everything there
                 singleFile = true;
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
                 // Read the file po content
                 var file = grunt.file.read(filepath);
                 var catalog = po.parse(file);
-
+                 var strings = {};
 
                 for (var i = 0; i < catalog.items.length; i++) {
                     var item = catalog.items[i];
@@ -161,11 +161,17 @@ module.exports = function(grunt) {
 
                         pluralizedStr = replacePlaceholder(pluralizedStr,options.placeholderStructure[0],options.placeholderStructure[1],options.enableAltPlaceholders);
                         strings[item.msgid] = pluralizedStr ;
+                        if (singleFile){
+                            singleFileStrings[item.msgid]=  pluralizedStr;
+                        }
 
                     }else{
                         var message = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
                         message = replacePlaceholder(message,options.placeholderStructure[0],options.placeholderStructure[1],options.enableAltPlaceholders);
                         strings[item.msgid] = message;
+                        if (singleFile){
+                            singleFileStrings[item.msgid]=message;
+                        }
                     }
                 }
 
@@ -174,12 +180,11 @@ module.exports = function(grunt) {
                     grunt.log.writeln('JSON file(s) created: "' + dest +'"');
                 }
 
-
             });
 
 
             if (singleFile){
-                grunt.file.write(f.dest, (options.stringify) ? JSON.stringify(strings, null, (options.pretty) ? '   ':'') : strings );
+                grunt.file.write(f.dest, (options.stringify) ? JSON.stringify(singleFileStrings, null, (options.pretty) ? '   ':'') : singleFileStrings );
                 grunt.log.writeln('JSON file(s) created: "' + f.dest + '"');
             }
         });
