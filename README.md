@@ -140,7 +140,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ###  Changelog
 
-*v 0.0.3 *
+v 0.0.3
 * Added support for creation of a single .json file with strings beloging to several po files
 * Added option " cleanPrevStrings: true ", it will clean all the previous generated files before creating the new ones. Defaults false.
 * Added variable replacement. Always it finds the standard format (%d) it will be replaced, and it allows you to specify a custom format as well.
