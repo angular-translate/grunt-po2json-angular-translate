@@ -30,6 +30,7 @@ module.exports = function(grunt) {
                 options: {
                     pretty: true,
                     upperCaseId: false,
+                    cleanPrevStrings: true
                 },
                 files: {
                     'tmp/' : ['test/fixtures/button.po']
@@ -45,9 +46,8 @@ module.exports = function(grunt) {
 
     grunt.loadTasks('tasks');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
-    grunt.registerTask('test', ['clean', 'po2json_angular_translate', 'nodeunit']);
+    grunt.registerTask('test', ['po2json_angular_translate', 'nodeunit']);
     grunt.registerTask('default', ['jshint', 'test']);
 
 };

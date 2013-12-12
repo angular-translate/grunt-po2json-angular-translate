@@ -30,7 +30,10 @@ grunt.initConfig({
      upperCaseId : false
     },
     your_target: {
-      // Target-specific file lists and/or options go here.
+                 files: {
+                     'tmp/dest.json' : ['test/fixtures/*.po'], // This will generate a single json file with all the specified strings
+                     'tmp/dest' : ['test/fixtures/*.po'] //this will create several json files with its own strings
+                        }
     },
   },
 });
@@ -49,6 +52,10 @@ Type: `Boolean`
 Default value:  false
 If you want to convert the ids to uppercase
 
+#### options.cleanPrevStrings
+Type: `Boolean`
+Default value:  false
+It will remove all the previous generated files on the destination specified before creating the new ones.
 
 ### Usage Examples
 
@@ -116,3 +123,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * Replace placeholders from %d to {{ d }}. With option to set custom placeholders in the options
 * Posibility to escape special characters
 * Option to generate the result either as a json file, as it is done currently, or directly in angular format
+
+###  Changelog
+
+*v 0.0.3 *
+* Added support for creation of a single .json file with strings beloging to several po files
+* Added option " cleanPrevStrings: true ", it will clean all the previous generated files before creating the new ones. Defaults false.

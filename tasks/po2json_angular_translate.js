@@ -10,7 +10,26 @@
 
 var po = require('node-po');
 var path = require('path');
+var fs = require('fs');
 
+//Taken from https://gist.github.com/liangzan/807712#comment-337828
+var  rmDir = function(dirPath) {
+    var files;
+    try { files  = fs.readdirSync(dirPath); }
+    catch(e) { return; }
+    if (files.length > 0){
+        for (var i = 0; i < files.length; i++) {
+            var filePath = dirPath + '/' + files[i];
+            if (fs.statSync(filePath).isFile()){
+                fs.unlinkSync(filePath);
+            }else{
+                rmDir(filePath);
+            }
+        }
+
+        fs.rmdirSync(dirPath);
+    }
+};
 
 module.exports = function(grunt) {
 
@@ -18,14 +37,14 @@ module.exports = function(grunt) {
         var options = this.options({
             pretty: false,
             fuzzy: false,
+            cleanPrevStrings: false,
             upperCaseId : false,
             stringify : true,
             offset : 1
         });
 
+
         this.files.forEach(function(f) {
-
-
             var filepaths = f.src.filter(function(filepath) {
                 // Warn on and remove invalid source files (if nonull was set).
                 if (!grunt.file.exists(filepath)) {
@@ -42,15 +61,30 @@ module.exports = function(grunt) {
                 return;
             }
 
-            filepaths.forEach(function(filepath){
-                // Prepare the file name
-                var filename = path.basename(filepath, path.extname(filepath));
-                var dest = path.join (f.dest, filename + ".json" );
 
-                // Read the file content
+            if (options.cleanPrevStrings){
+                rmDir(f.dest);
+            }
+
+            var destPath = path.extname(f.dest);
+            var dest;
+            var singleFile = false;
+            var strings = {};
+
+            if (destPath !== ""){ //It is just one file, we should put everything there
+                singleFile = true;
+            }
+
+            filepaths.forEach(function(filepath){
+                if (! singleFile ){
+                    // Prepare the file name
+                    var filename = path.basename(filepath, path.extname(filepath));
+                    dest = path.join (f.dest, filename + ".json" );
+                }
+                // Read the file po content
                 var file = grunt.file.read(filepath);
                 var catalog = po.parse(file);
-                var strings = {};
+
 
                 for (var i = 0; i < catalog.items.length; i++) {
                     var item = catalog.items[i];
@@ -107,11 +141,19 @@ module.exports = function(grunt) {
                     }
                 }
 
-                grunt.file.write(dest, (options.stringify) ? JSON.stringify(strings, null, (options.pretty) ? '   ':'') : strings );
-                grunt.log.writeln('JSON file(s) created in "' + f.dest + '"');
+                if (!singleFile){
+                    grunt.file.write(dest, (options.stringify) ? JSON.stringify(strings, null, (options.pretty) ? '   ':'') : strings );
+                    grunt.log.writeln('JSON file(s) created: "' + dest +'"');
+                }
+
 
             });
 
+
+            if (singleFile){
+                grunt.file.write(f.dest, (options.stringify) ? JSON.stringify(strings, null, (options.pretty) ? '   ':'') : strings );
+                grunt.log.writeln('JSON file(s) created: "' + f.dest + '"');
+            }
         });
     });
 
