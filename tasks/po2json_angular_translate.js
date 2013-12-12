@@ -33,6 +33,29 @@ var  rmDir = function(dirPath) {
 
 module.exports = function(grunt) {
 
+    var replacePlaceholder = function(string, openingMark, closingMark,altEnabled){
+        if (closingMark !== undefined &&
+            altEnabled &&
+           string.indexOf(closingMark !== -1)){
+            if (string.indexOf(openingMark) !== -1){
+                string = string.replace(openingMark,"{{");
+            }
+            if (string.indexOf(closingMark) !== -1){
+                string = string.replace(closingMark,"}}");
+            }
+        }
+
+         //If there is no closing mark, then we have standard format: %0,
+        if(string.indexOf(closingMark === -1)){
+            var pattern ="\\%([0-9]|[a-z])";
+            var re = new RegExp(pattern,"g");
+            var index = string.indexOf(re);
+            var substr = string.substr(index,index+2);
+            string = string.replace(re, "{{"+substr+"}}");
+        }
+        return string;
+    };
+
     grunt.registerMultiTask('po2json_angular_translate', 'grunt plugin to convert po to angangular-translate format', function() {
         var options = this.options({
             pretty: false,
@@ -40,7 +63,9 @@ module.exports = function(grunt) {
             cleanPrevStrings: false,
             upperCaseId : false,
             stringify : true,
-            offset : 1
+            offset : 1,
+            enableAltPlaceholders: true,
+            placeholderStructure: ["{","}"]
         });
 
 
@@ -134,10 +159,13 @@ module.exports = function(grunt) {
                             }
                         }
 
+                        pluralizedStr = replacePlaceholder(pluralizedStr,options.placeholderStructure[0],options.placeholderStructure[1],options.enableAltPlaceholders);
                         strings[item.msgid] = pluralizedStr ;
 
                     }else{
-                        strings[item.msgid] = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
+                        var message = item.msgstr.length === 1 ? item.msgstr[0] : item.msgstr;
+                        message = replacePlaceholder(message,options.placeholderStructure[0],options.placeholderStructure[1],options.enableAltPlaceholders);
+                        strings[item.msgid] = message;
                     }
                 }
 

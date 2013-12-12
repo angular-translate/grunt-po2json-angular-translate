@@ -10,18 +10,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "button/submit"
-msgstr "Submit"
+msgstr "Submit %d"
 
 #msgid "button/save-change"
 #msgstr "Save Change"
 
 msgid "button/save-change"
 msgid_plural "button/save-changes"
-msgstr[0] "Save Change"
-msgstr[1] "Save Changes"
+msgstr[0] "Save %d Change"
+msgstr[1] "Save %d Changes"
 
 msgid "button/register"
-msgstr "Register"
+msgstr "Register {0}"
 
 msgid "button/delete-account"
 msgstr "Delete Account"

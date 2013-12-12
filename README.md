@@ -43,19 +43,31 @@ grunt.initConfig({
 
 #### options.pretty
 Type: `Boolean`
-Default value:  false
+Default value:  `false`
 If you want to pretty print the result
 
 
 #### options.upperCaseId
 Type: `Boolean`
-Default value:  false
+Default value:  `false`
 If you want to convert the ids to uppercase
 
 #### options.cleanPrevStrings
 Type: `Boolean`
-Default value:  false
+Default value:  `false`
 It will remove all the previous generated files on the destination specified before creating the new ones.
+
+
+#### options.enableAltPlaceholders
+Type: `Boolean`
+Default value:  `true`
+It enables you to use alternative placeholders format, it defaults with {foo}.
+
+#### options.placeholderStructure
+Type: `Array`
+Default value:  `['{','}']`
+Here you can set your own placeholder structure. Notice that you must specify a closing mark.
+
 
 ### Usage Examples
 
@@ -106,6 +118,8 @@ msgstr[1] "Save Changes"
 ```
 
 
+Note that the placeholder for numbers should be: %d, so the plugin understands that there goes a number pluralization.
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
@@ -129,3 +143,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 *v 0.0.3 *
 * Added support for creation of a single .json file with strings beloging to several po files
 * Added option " cleanPrevStrings: true ", it will clean all the previous generated files before creating the new ones. Defaults false.
+* Added variable replacement. Always it finds the standard format (%d) it will be replaced, and it allows you to specify a custom format as well.
