@@ -132,11 +132,13 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Features planned
 
-* Support for interpolation
+* Support for messageFormat interpolations
 * Improve pluralizations.
-* Replace placeholders from %d to {{ d }}. With option to set custom placeholders in the options
 * Posibility to escape special characters
 * Option to generate the result either as a json file, as it is done currently, or directly in angular format
+* Add support for flags, fuzzy strings, etc.
+* Organize by namespaces a json file.
+
 
 ###  Changelog
 
