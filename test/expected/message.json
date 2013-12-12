@@ -1,0 +1,4 @@
+{
+   "[:message/maintenance :title]": "Maintenance",
+   "[:message/maintenance :body]": "There is currently some scheduled maintenance on our servers. \\nPlease check back in a few minutes."
+}
