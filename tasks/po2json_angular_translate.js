@@ -34,14 +34,14 @@ var  rmDir = function(dirPath) {
 module.exports = function(grunt) {
 
     var replacePlaceholder = function(string, openingMark, closingMark,altEnabled){
-        if (closingMark !== undefined &&
-            altEnabled &&
-           string.indexOf(closingMark !== -1)){
+        if (closingMark !== undefined && altEnabled && string.indexOf(closingMark !== -1)) {
             if (string.indexOf(openingMark) !== -1){
-                string = string.replace(openingMark,"{{");
+                var regexp = new RegExp(openingMark, 'g');
+                string = string.replace(regexp, "{{");
             }
             if (string.indexOf(closingMark) !== -1){
-                string = string.replace(closingMark,"}}");
+                var regexp = new RegExp(closingMark, 'g');
+                string = string.replace(regexp, "}}");
             }
         }
 
