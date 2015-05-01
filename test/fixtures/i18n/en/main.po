@@ -1,0 +1,11 @@
+msgid ""
+msgstr ""
+
+msgid "HELLO_WORLD"
+msgstr "Hello world"
+
+msgid "INTRO"
+msgstr "Introduction"
+
+msgid "DESCRIPTION"
+msgstr "Description"
