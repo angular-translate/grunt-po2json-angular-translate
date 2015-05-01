@@ -68,6 +68,11 @@ Type: `Array`
 Default value:  `['{','}']`
 Here you can set your own placeholder structure. Notice that you must specify a closing mark.
 
+#### options.maintainFolderStructure
+Type: `Boolean`
+Default value:  `false`
+It will maintain the original folder structure from source directory when the source path has been written with '**' in path.
+
 
 ### Usage Examples
 
