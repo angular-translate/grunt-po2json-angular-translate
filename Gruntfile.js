@@ -30,11 +30,13 @@ module.exports = function(grunt) {
                 options: {
                     pretty: true,
                     upperCaseId: false,
-                    cleanPrevStrings: true
+                    cleanPrevStrings: true,
+                    maintainFolderStructure: true
                 },
                 files: {
                     'tmp/' : ['test/fixtures/*.po'],
-                    'tmp/several.json' : ['test/fixtures/*.po']
+                    'tmp/several.json' : ['test/fixtures/*.po'],
+                    'tmp/mantainFolder' : ['test/fixtures/**/*.po']
                 },
             }
         },
