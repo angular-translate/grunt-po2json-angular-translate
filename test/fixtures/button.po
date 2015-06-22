@@ -12,8 +12,8 @@ msgstr ""
 msgid "button/submit"
 msgstr "Submit %d"
 
-#msgid "button/save-change"
-#msgstr "Save Change"
+#: msgid "button/save-change"
+#: msgstr "Save Change"
 
 msgid "button/save-change"
 msgid_plural "button/save-changes"
