@@ -8,7 +8,7 @@
 
 'use strict';
 
-var po = require('node-po');
+var po = require('pofile');
 var path = require('path');
 var fs = require('fs');
 

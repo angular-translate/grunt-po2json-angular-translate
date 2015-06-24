@@ -1,7 +1,7 @@
 'use strict';
 
 var grunt = require('grunt');
-var po = require('node-po');
+var po = require('pofile');
 
 
 /*
@@ -32,7 +32,8 @@ exports.po2json_angular_translate = {
         test.expect(1);
 
         var generated = grunt.file.read('tmp/button.json');
-        var expected = grunt.file.read('test/expected/button.json');
+        //git adds the CRLF meanwhile the grunt doesn't, so we remove the \r
+        var expected = grunt.file.read('test/expected/button.json').replace(/\r\n/g, '\n');
 
         test.strictEqual(generated, expected, 'Should be the same JSON objext, just msgid and msgstr.');
 
