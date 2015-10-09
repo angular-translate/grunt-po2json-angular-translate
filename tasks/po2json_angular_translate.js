@@ -38,10 +38,10 @@ module.exports = function(grunt) {
             altEnabled &&
            string.indexOf(closingMark !== -1)){
             if (string.indexOf(openingMark) !== -1){
-                string = string.replace(openingMark,"{{");
+                string = string.replace(new RegExp(openingMark, 'g'),"{{");
             }
             if (string.indexOf(closingMark) !== -1){
-                string = string.replace(closingMark,"}}");
+                string = string.replace(new RegExp(closingMark, 'g'),"}}");
             }
         }
 
