@@ -2,5 +2,6 @@
    "button/submit": "Submit {{d}}",
    "button/save-change": "Save {{PLURALIZE, plural, offset:1 =2{# Change}} other{# Changes}}",
    "button/register": "Register {{0}}",
-   "button/delete-account": "Delete Account"
+   "button/delete-account": "Delete Account",
+   "button/multiple-placeholder": "Delete {{ account }} for {{ user }}"
 }

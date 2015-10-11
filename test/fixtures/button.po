@@ -25,3 +25,6 @@ msgstr "Register {0}"
 
 msgid "button/delete-account"
 msgstr "Delete Account"
+
+msgid "button/multiple-placeholder"
+msgstr "Delete { account } for { user }"
