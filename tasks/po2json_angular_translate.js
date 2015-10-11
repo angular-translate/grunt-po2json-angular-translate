@@ -34,29 +34,23 @@ var  rmDir = function(dirPath) {
 module.exports = function(grunt) {
 
     var replacePlaceholder = function(string, openingMark, closingMark,altEnabled, isPluralString){
+        var pattern;
         if (closingMark !== undefined &&
             altEnabled &&
            string.indexOf(closingMark !== -1)){
             if (string.indexOf(openingMark) !== -1){
-                if (isPluralString) {
-                    string = string.replace(openingMark,"{{");
-                } else {
-                    string = string.replace(new RegExp(openingMark, 'g'),"{{");
-                }
-                
+                pattern = isPluralString ? openingMark : new RegExp(openingMark, 'g');
+                string = string.replace(pattern,"{{");
             }
             if (string.indexOf(closingMark) !== -1){
-                if (isPluralString) {
-                    string = string.replace(closingMark,"}}");
-                } else {
-                    string = string.replace(new RegExp(closingMark, 'g'),"}}");
-                }
+                pattern = isPluralString ? closingMark : new RegExp(closingMark, 'g');
+                string = string.replace(pattern,"}}");
             }
         }
 
          //If there is no closing mark, then we have standard format: %0,
         if(string.indexOf(closingMark === -1)){
-            var pattern ="\\%([0-9]|[a-z])";
+            pattern ="\\%([0-9]|[a-z])";
             var re = new RegExp(pattern,"g");
             var index = string.indexOf(re);
             var substr = string.substr(index,index+2);
