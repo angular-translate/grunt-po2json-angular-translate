@@ -108,6 +108,10 @@ module.exports = function(grunt) {
                 }
                 // Read the file po content
                 var file = grunt.file.read(filepath);
+
+                //support both unix and windows newline formats.
+                file = file.replace(/\r\n/g, '\n');
+
                 var catalog = po.parse(file);
                  var strings = {};
 
