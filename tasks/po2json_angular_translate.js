@@ -38,12 +38,12 @@ module.exports = function(grunt) {
         if (closingMark !== undefined &&
             altEnabled &&
            string.indexOf(closingMark !== -1)){
-            if (string.indexOf(openingMark) !== -1){
-                pattern = isPluralString ? openingMark : new RegExp(openingMark, 'g');
+            if (string.indexOf(openingMark) !== -1 && !isPluralString){
+                pattern = new RegExp(openingMark, 'g');
                 string = string.replace(pattern,"{{");
             }
-            if (string.indexOf(closingMark) !== -1){
-                pattern = isPluralString ? closingMark : new RegExp(closingMark, 'g');
+            if (string.indexOf(closingMark) !== -1 && !isPluralString){
+                pattern = new RegExp(closingMark, 'g');
                 string = string.replace(pattern,"}}");
             }
         }
