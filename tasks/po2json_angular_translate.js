@@ -43,7 +43,11 @@ function getPluralForms(locale) {
 function convertPlural(forms, locale) {
     var pluralForms = getPluralForms(locale);
     if (!pluralForms || (pluralForms.length !== forms.length && pluralForms.length - 1 !== forms.length)) {
-        return forms[0];
+        return "";
+    }
+
+    if (forms.some(function(form) {return form === ""})) {
+        return "";
     }
 
     var res = "{n, plural, ";
