@@ -42,13 +42,15 @@ function getPluralForms(locale) {
 
 function convertPlural(forms, locale) {
     var pluralForms = getPluralForms(locale);
-    if (!pluralForms) {
+    if (!pluralForms || (pluralForms.length !== forms.length && pluralForms.length - 1 !== forms.length)) {
         return forms[0];
     }
 
     var res = "{n, plural, ";
     for (var i = 0; i < forms.length; i++) {
-        res += pluralForms[i] + " {" + forms[i].replace("%d", "{n}") + "}";
+        // if it's the last message form, take the last pluralForm ("other")
+        var pluralForm = (i === forms.length - 1) ? pluralForms[pluralForms.length - 1] : pluralForms[i];
+        res += pluralForm + " {" + forms[i].replace("%d", "{n}") + "}";
         if (i < forms.length - 1) {
             res += " ";
         }
