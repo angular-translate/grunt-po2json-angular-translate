@@ -11,6 +11,7 @@
 var po = require('node-po');
 var path = require('path');
 var fs = require('fs');
+var cldr = require('cldr');
 
 //Taken from https://gist.github.com/liangzan/807712#comment-337828
 var  rmDir = function(dirPath) {
@@ -30,6 +31,30 @@ var  rmDir = function(dirPath) {
         fs.rmdirSync(dirPath);
     }
 };
+
+function getPluralForms(locale) {
+    try {
+        return Object.keys(cldr.extractUnitPatterns(locale).long.unit.lengthMeter);
+    } catch (ex) {
+        return;
+    }
+}
+
+function convertPlural(forms, locale) {
+    var pluralForms = getPluralForms(locale);
+    if (!pluralForms) {
+        return forms[0];
+    }
+
+    var res = "{n, plural, ";
+    for (var i = 0; i < forms.length; i++) {
+        res += pluralForms[i] + " {" + forms[i].replace("%d", "{n}") + "}";
+        if (i < forms.length - 1) {
+            res += " ";
+        }
+    }
+    return res + "}";
+}
 
 module.exports = function(grunt) {
 
@@ -123,47 +148,7 @@ module.exports = function(grunt) {
                     }
 
                     if (item.msgid_plural!== null && item.msgstr.length > 1){
-                        var singular_words = item.msgstr[0].split(" ");
-                        var plural_words = item.msgstr[1].split(" ");
-                        var pluralizedStr = "";
-                        var numberPlaceHolder = false;
-
-                        if (singular_words.length !== plural_words.length){
-                            grunt.log.writeln('Either the singular or plural string had more words in the msgid: ' + item.msgid + ', the extra words were omitted');
-                        }
-
-                        for (var x = 0; x < singular_words.length; x++){
-
-                            if(singular_words[x] === undefined || plural_words[x] === undefined){
-                                continue;
-                            }
-
-                            if (plural_words[x].indexOf('%d') !== -1){
-                                numberPlaceHolder = true;
-                                continue;
-                            }
-
-                            if (singular_words[x] !== plural_words[x]){
-                                var p = "";
-                                if (numberPlaceHolder){
-                                    p = "# ";
-                                    numberPlaceHolder = false;
-                                }
-
-                                var strPl = "PLURALIZE, plural, offset:"+options.offset;
-
-                                pluralizedStr += "{"+ strPl + " =2{" + p + singular_words[x]+"}" +
-                                    " other{" + p + plural_words[x] +"}}";
-
-                            }else{
-                                pluralizedStr += singular_words[x];
-                            }
-
-                            if (x !== singular_words.length - 1 ){
-                                pluralizedStr += " ";
-                            }
-                        }
-
+                        var pluralizedStr = convertPlural(item.msgstr, filename);
                         pluralizedStr = replacePlaceholder(pluralizedStr,options.placeholderStructure[0],options.placeholderStructure[1],options.enableAltPlaceholders);
                         strings[item.msgid] = pluralizedStr ;
                         if (singleFile){
