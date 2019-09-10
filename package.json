@@ -38,7 +38,8 @@
   },
     "dependencies": {
         "node-po": "~0.1.2",
-        "path"  : "~0.4.9"
+        "path"  : "~0.4.9",
+        "cldr": "4.5.0"
     },
     "keywords": [
         "gruntplugin"
